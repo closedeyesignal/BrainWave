@@ -1,13 +1,16 @@
-import tkinter as tk
 from tkinter import ttk
+from utilities import plot_functions as plf
+
 
 class ChannelPlot(ttk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
 
-        # self.columnconfigure(0, weight=1)
-        # self.rowconfigure()
+        self.container = ttk.Frame(self)
+        self.container.grid(row=1, column=0, sticky="EW")
 
-        channelplot_container = ttk.Frame(self)
+        self.canvas = []
+        self.plot_list = []
+        self.plot_data = []
 
-        channelplot_container.grid(row=1, column=0, sticky="EW")
+        plf.draw_empty_plot(self)

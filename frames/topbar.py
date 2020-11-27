@@ -1,12 +1,16 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
+
 
 class TopBar(ttk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent)
 
-        # self.columnconfigure(0, weight=1)
-        # self.rowconfigure()
+        self.low_freq_value = tk.StringVar()
+        self.low_freq_value.set("0.5")
+
+        self.hi_freq_value = tk.StringVar()
+        self.hi_freq_value.set("70.0")
 
         topbar_container = ttk.Frame(self)
 
@@ -15,7 +19,7 @@ class TopBar(ttk.Frame):
         quit_button = ttk.Button(
             topbar_container,
             text="Quit",
-            command=parent.quit,
+            command= lambda: self.quit_with_warning(parent),
             cursor="hand2"
         )
 
@@ -33,7 +37,7 @@ class TopBar(ttk.Frame):
         clear_button = ttk.Button(
             topbar_container,
             text="Clear",
-            command=parent.donothing,
+            command=parent.clear_plot,
             cursor="hand2"
         )
 
@@ -98,18 +102,23 @@ class TopBar(ttk.Frame):
 
         filter_button.grid(row=0, column=9, sticky="EW", padx=2)
 
-        low_freq_filter_textfield = tk.Text(topbar_container)
-        low_freq_filter_textfield.configure(height=1, width=4)
-        low_freq_filter_textfield.insert("1.0", "0.5")
+        low_freq_filter_textfield = tk.Entry(topbar_container, textvariable=self.low_freq_value)
+        low_freq_filter_textfield.configure(width=4)
         low_freq_filter_textfield.grid(row=0, column=10, sticky="EW", padx=2)
 
         low_freq_filter_textlabel = ttk.Label(topbar_container, text="LF Filter")
         low_freq_filter_textlabel.grid(row=0, column=11, sticky="EW", padx=2)
 
-        high_freq_filter_textfield = tk.Text(topbar_container)
-        high_freq_filter_textfield.configure(height=1, width=4)
-        high_freq_filter_textfield.insert("1.0", "70.0")
+        high_freq_filter_textfield = tk.Entry(topbar_container, textvariable=self.hi_freq_value)
+        high_freq_filter_textfield.configure(width=4)
         high_freq_filter_textfield.grid(row=0, column=12, sticky="EW", padx=2)
 
         high_freq_filter_textlabel = ttk.Label(topbar_container, text="HF Filter")
         high_freq_filter_textlabel.grid(row=0, column=13, sticky="EW", padx=2)
+
+    def quit_with_warning(self, parent):
+        msgbox = tk.messagebox.askquestion('Exit Application',
+                                           'Are you sure you want to exit the application?',
+                                           icon='warning')  # icon warning ensures noise alert
+        if msgbox == 'yes':
+            parent.quit()
