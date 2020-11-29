@@ -24,6 +24,14 @@ class BrainWave(tk.Tk):
         filemenu.add_command(label="Exit", command=self.quit)
         self.menubar.add_cascade(label="File", menu=filemenu)
 
+        modelmenu = tk.Menu(self.menubar, tearoff=0)
+        modelmenu.add_command(label="Generalized rewiring model", command=self.donothing)
+        modelmenu.add_command(label="BrainNet", command=self.donothing)
+        modelmenu.add_command(label="SIRS", command=self.donothing)
+        modelmenu.add_command(label="Kuramoto", command=self.donothing)
+        modelmenu.add_command(label="Machine Learning", command=self.donothing)
+        self.menubar.add_cascade(label="Model", menu=modelmenu)
+
         container = ttk.Frame(self)
         container.grid()
         container.columnconfigure(0, weight=1)
