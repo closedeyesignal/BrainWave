@@ -12,7 +12,6 @@ class BrainWave(tk.Tk):
         self.geometry("1100x800")
         self.title("BrainWave")
         self.minsize(960, 500)
-        self.columnconfigure(1, weight=1)
 
         self.filename = tk.StringVar()
         self.frames = {}
@@ -24,20 +23,22 @@ class BrainWave(tk.Tk):
         filemenu.add_command(label="Exit", command=self.quit)
         self.menubar.add_cascade(label="File", menu=filemenu)
 
-        container = ttk.Frame(self)
-        container.grid()
-        container.columnconfigure(0, weight=1)
-
-        top_bar = TopBar(self, container)
-        top_bar.grid(row=0, column=0, columnspan=2, sticky="EW")
+        top_bar = TopBar(self)
+        top_bar.grid(row=0, column=0, sticky="EW")
+        top_bar.columnconfigure(0, weight=1)
+        top_bar.rowconfigure(0, weight=0)
         self.frames[TopBar] = top_bar
 
-        plot_frame = ChannelPlot(self, container)
-        plot_frame.grid(row=1, column=0, sticky="EW")
+        plot_frame = ChannelPlot(self)
+        plot_frame.grid(row=1, column=0, sticky="NSEW")
+        plot_frame.columnconfigure(0, weight=1)
+        plot_frame.rowconfigure(1,  weight=1)
         self.frames[ChannelPlot] = plot_frame
 
-        bottom_bar = BottomBar(self, container)
+        bottom_bar = BottomBar(self)
         bottom_bar.grid(row=2, column=0, sticky="EW")
+        bottom_bar.columnconfigure(0, weight=1)
+        bottom_bar.rowconfigure(2, weight=0)
         self.frames[BottomBar] = bottom_bar
 
     def donothing(self):

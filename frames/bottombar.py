@@ -3,7 +3,7 @@ from tkinter import ttk
 
 
 class BottomBar(ttk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent):
         super().__init__(parent)
 
         self.filename_entry = tk.StringVar()
@@ -99,3 +99,6 @@ class BottomBar(ttk.Frame):
         self.channel_textfield.configure(width=4)
         self.channel_textfield["state"] = "disabled"
         self.channel_textfield.grid(row=0, column=11, sticky="EW", padx=2)
+
+        for x in range(11):
+            tk.Grid.columnconfigure(bottombar_container, x, weight=1)

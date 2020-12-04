@@ -3,7 +3,7 @@ from tkinter import ttk, messagebox
 
 
 class TopBar(ttk.Frame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent):
         super().__init__(parent)
 
         self.low_freq_value = tk.StringVar()
@@ -13,13 +13,12 @@ class TopBar(ttk.Frame):
         self.hi_freq_value.set("70.0")
 
         topbar_container = ttk.Frame(self)
-
         topbar_container.grid(row=0, column=0, sticky="EW")
 
         quit_button = ttk.Button(
             topbar_container,
             text="Quit",
-            command= lambda: self.quit_with_warning(parent),
+            command=lambda: self.quit_with_warning(parent),
             cursor="hand2"
         )
 
@@ -115,6 +114,9 @@ class TopBar(ttk.Frame):
 
         high_freq_filter_textlabel = ttk.Label(topbar_container, text="HF Filter")
         high_freq_filter_textlabel.grid(row=0, column=13, sticky="EW", padx=2)
+
+        for x in range(13):
+            tk.Grid.columnconfigure(topbar_container, x, weight=1)
 
     def quit_with_warning(self, parent):
         msgbox = tk.messagebox.askquestion('Exit Application',
