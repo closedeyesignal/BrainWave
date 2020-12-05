@@ -8,6 +8,7 @@ import numpy as np
 def draw_empty_plot(frame):
     # the figure that will contain the plot
     fig = Figure(dpi=100)
+    fig.subplots_adjust(left=0.01, bottom=0.01, right=0.99, top=0.99, wspace=0, hspace=0)
 
     # adding the subplot
     frame.plot_list = fig.add_subplot(111)
@@ -20,6 +21,10 @@ def draw_empty_plot(frame):
         right=False,
         labelleft=False,
         labelbottom=False)
+    frame.plot_list.spines['top'].set_visible(False)
+    frame.plot_list.spines['right'].set_visible(False)
+    frame.plot_list.spines['bottom'].set_visible(False)
+    frame.plot_list.spines['left'].set_visible(False)
 
     frame.canvas = FigureCanvasTkAgg(fig, master=frame.container)
     frame.canvas.draw()
