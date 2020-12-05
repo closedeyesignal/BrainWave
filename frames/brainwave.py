@@ -1,5 +1,6 @@
 import tkinter as tk
-from tkinter import ttk, filedialog, messagebox
+import os
+from tkinter import filedialog, messagebox
 from frames import ChannelPlot, BottomBar, TopBar
 from pathlib import Path
 from utilities import plot_functions as plf
@@ -46,7 +47,7 @@ class BrainWave(tk.Tk):
 
     def browse_files(self):
         self.filename = tk.filedialog.askopenfilename(
-            initialdir="/",
+            initialdir=os.getcwd(),
             title="Select a file",
             filetypes=(("Text files",
                         "*.txt"),
@@ -59,11 +60,13 @@ class BrainWave(tk.Tk):
         try:
             self.read_input()
         except Exception as e:
-            tk.messagebox.showinfo('File parser error', 'Could not parse input file, please check format:\n {}'.format(e))
+            tk.messagebox.showinfo(
+                'File parser error',
+                'Could not parse input file, please check format:\n {}'.format(e))
         else:
             self.frames[BottomBar].filename_entry.set(Path(self.filename).name)
 
-            plf.update_plot(self.frames[ChannelPlot])
+            plf.update_plot(self.frames[ChannelPlot], int(self.frames[BottomBar].number_of_channels.get()))
 
     def read_input(self):
 

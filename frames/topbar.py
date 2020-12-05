@@ -22,7 +22,7 @@ class TopBar(ttk.Frame):
             cursor="hand2"
         )
 
-        quit_button.grid(row=0, column=0, sticky="EW",padx=2)
+        quit_button.grid(row=0, column=0, sticky="EW", padx=2)
 
         open_button = ttk.Button(
             topbar_container,
@@ -87,7 +87,7 @@ class TopBar(ttk.Frame):
         epoch_combobox["values"] = ("4096", "2048", "1024", "512", "256", "128", "64")
         epoch_combobox.grid(row=0, column=7, sticky="EW", padx=2)
         epoch_combobox.configure(width=5)
-        #have to bind the combobox
+        # have to bind the combobox
 
         epoch_text_label = ttk.Label(topbar_container, text="Epoch length")
         epoch_text_label.grid(row=0, column=8, sticky="EW", padx=2)

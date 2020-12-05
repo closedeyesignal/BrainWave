@@ -1,6 +1,6 @@
-import tkinter as tk
 from tkinter import ttk
 from utilities import plot_functions as plf
+import tkinter as tk
 
 
 class ChannelPlot(ttk.Frame):
@@ -9,12 +9,11 @@ class ChannelPlot(ttk.Frame):
 
         self.container = ttk.Frame(self)
         self.container.grid(row=1, column=0, sticky="NSEW")
+        tk.Grid.rowconfigure(self.container, 0, weight=1)
+        tk.Grid.columnconfigure(self.container, 0, weight=1)
 
         self.canvas = []
         self.plot_list = []
         self.plot_data = []
 
         plf.draw_empty_plot(self)
-
-        for x in range(13):
-            tk.Grid.columnconfigure(self.container, x, weight=1)
