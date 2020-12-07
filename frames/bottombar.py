@@ -11,7 +11,7 @@ class BottomBar(ttk.Frame):
         self.epoch_selection = tk.StringVar()
         self.epoch_selection.set("1")
         self.number_of_channels = tk.StringVar()
-        self.number_of_channels.set("5")
+        self.number_of_channels.set("21")
         self.epoch_requested = tk.StringVar()
         self.epoch_requested.set("20")
 

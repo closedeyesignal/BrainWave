@@ -66,6 +66,7 @@ class BrainWave(tk.Tk):
         else:
             self.frames[BottomBar].filename_entry.set(Path(self.filename).name)
 
+            plf.draw_empty_plot(self.frames[ChannelPlot])
             plf.update_plot(self.frames[ChannelPlot], int(self.frames[BottomBar].number_of_channels.get()))
 
     def read_input(self):
@@ -90,4 +91,12 @@ class BrainWave(tk.Tk):
         self.frames[BottomBar].filename_entry.set("")
         self.filename = ""
 
+        self.frames[ChannelPlot].plot_data = []
+
         plf.draw_empty_plot(self.frames[ChannelPlot])
+
+    def update_markers(self):
+        if self.frames[TopBar].showMarker.get():
+            self.frames[ChannelPlot].plot_markers()
+        else:
+            self.frames[ChannelPlot].clear_markers()

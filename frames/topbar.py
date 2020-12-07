@@ -64,6 +64,7 @@ class TopBar(ttk.Frame):
         show_marker_check_button = ttk.Checkbutton(
             topbar_container,
             text="Show markers",
+            command=parent.update_markers,
             variable=self.showMarker
         )
 
