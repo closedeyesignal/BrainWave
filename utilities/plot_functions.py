@@ -95,7 +95,7 @@ def plot_no_data(frame):
                              ha='center', size=10, color='blue',
                              path_effects=[pe.withStroke(linewidth=5, foreground='w')])
 
-    if frame.master.frames[TopBar].showMarker:
+    if frame.master.frames[TopBar].showMarker.get():
         frame.plot_markers()
 
 
