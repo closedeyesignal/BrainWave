@@ -25,7 +25,9 @@ def draw_empty_plot(frame):
 
     frame.canvas = FigureCanvasTkAgg(fig, master=frame.container)
 
-    if not frame.plot_data:  # in case there is no data set up blank image
+    fig.canvas.callbacks.connect('button_press_event', on_click)
+
+    if not frame.plot_data:  # in case there is no data set up template plot
         plot_no_data(frame)
 
     frame.canvas.draw()
@@ -95,3 +97,31 @@ def plot_no_data(frame):
 
     if frame.master.frames[TopBar].showMarker:
         frame.plot_markers()
+
+
+def on_click(event):
+    if event.button == 1:
+        for cursor_marker in event.guiEvent.widget.master.master.mouse_marker:
+            cursor_marker.remove()
+
+        event.guiEvent.widget.master.master.mouse_marker = []
+
+        x_min = event.inaxes.dataLim.bounds[0]
+        x_max = event.inaxes.dataLim.bounds[2]
+        y_min = event.inaxes.dataLim.bounds[1]
+        y_max = event.inaxes.dataLim.bounds[3] - 1
+
+        x, y = event.inaxes.transData.inverted().transform((event.x, event.y))
+
+        if (x < x_min) or (x > x_max):
+            return
+
+        temp_marker = event.inaxes.plot([x, x],
+                                        [y_min, y_max],
+                                        color='b')
+        for line in temp_marker:
+            event.guiEvent.widget.master.master.mouse_marker.append(line)
+
+        event.inaxes.figure.canvas.draw()
+    else:
+        pass

@@ -16,8 +16,8 @@ class ChannelPlot(ttk.Frame):
         self.canvas = []
         self.plot_list = []
         self.plot_data = []
-        self.show_markers = tk.BooleanVar()
         self.markers = []
+        self.mouse_marker = []
 
         plf.draw_empty_plot(self)
 
