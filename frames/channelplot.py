@@ -9,7 +9,7 @@ class ChannelPlot(ttk.Frame):
         super().__init__(parent)
 
         self.container = ttk.Frame(self)
-        self.container.grid(row=1, column=0, sticky="NSEW")
+        self.container.grid(row=1, column=1, sticky="NSEW")
         tk.Grid.rowconfigure(self.container, 0, weight=1)
         tk.Grid.columnconfigure(self.container, 0, weight=1)
 

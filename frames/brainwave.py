@@ -1,7 +1,7 @@
 import tkinter as tk
 import os
 from tkinter import filedialog, messagebox
-from frames import ChannelPlot, BottomBar, TopBar
+from frames import ChannelPlot, BottomBar, TopBar, LeftBar, RightBar
 from pathlib import Path
 from utilities import plot_functions as plf
 
@@ -10,9 +10,9 @@ class BrainWave(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.geometry("1100x800")
+        self.geometry("1200x600")
         self.title("BrainWave")
-        self.minsize(960, 500)
+        self.minsize(1000, 500)
 
         self.filename = tk.StringVar()
         self.frames = {}
@@ -25,19 +25,31 @@ class BrainWave(tk.Tk):
         self.menubar.add_cascade(label="File", menu=filemenu)
 
         top_bar = TopBar(self)
-        top_bar.grid(row=0, column=0, sticky="EW")
+        top_bar.grid(row=0, column=0, columnspan=3, sticky="EW")
         top_bar.columnconfigure(0, weight=1)
         top_bar.rowconfigure(0, weight=0)
         self.frames[TopBar] = top_bar
 
+        left_bar = LeftBar(self)
+        left_bar.grid(row=1, column=0, sticky="NS")
+        left_bar.columnconfigure(0, weight=0)
+        left_bar.rowconfigure(1, weight=1)
+        self.frames[LeftBar] = left_bar
+
         plot_frame = ChannelPlot(self)
-        plot_frame.grid(row=1, column=0, sticky="NSEW")
-        plot_frame.columnconfigure(0, weight=1)
+        plot_frame.grid(row=1, column=1, sticky="NSEW")
+        plot_frame.columnconfigure(1, weight=1)
         plot_frame.rowconfigure(1,  weight=1)
         self.frames[ChannelPlot] = plot_frame
 
+        right_bar = RightBar(self)
+        right_bar.grid(row=1, column=2, sticky="NS")
+        right_bar.columnconfigure(2, weight=0)
+        right_bar.rowconfigure(1, weight=1)
+        self.frames[RightBar] = right_bar
+
         bottom_bar = BottomBar(self)
-        bottom_bar.grid(row=2, column=0, sticky="EW")
+        bottom_bar.grid(row=2, column=0, columnspan=3, sticky="EW")
         bottom_bar.columnconfigure(0, weight=1)
         bottom_bar.rowconfigure(2, weight=0)
         self.frames[BottomBar] = bottom_bar
