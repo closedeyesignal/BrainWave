@@ -3,6 +3,7 @@ from tkinter import ttk, filedialog, messagebox
 from frames import ChannelPlot, BottomBar, TopBar
 from pathlib import Path
 from utilities import plot_functions as plf
+from windows import MachineLearning
 
 
 class BrainWave(tk.Tk):
@@ -16,6 +17,7 @@ class BrainWave(tk.Tk):
 
         self.filename = tk.StringVar()
         self.frames = {}
+        self.windows = {}
 
         self.menubar = tk.Menu(self)
         filemenu = tk.Menu(self.menubar, tearoff=0)
@@ -158,8 +160,10 @@ class BrainWave(tk.Tk):
         plf.draw_empty_plot(self.frames[ChannelPlot])
 
     def machine_learning_window(self):
-        win = tk.Toplevel()
-        win.wm_title("Machine Learning")
+        if not MachineLearning in self.windows:
+            secondary_window = MachineLearning()
+            secondary_window.config(menu=secondary_window.menubar)
+            self.windows[MachineLearning] = secondary_window
 
     def sirs_window(self):
         win = tk.Toplevel()
