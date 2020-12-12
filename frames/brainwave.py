@@ -86,11 +86,11 @@ class BrainWave(tk.Tk):
         self.menubar.add_cascade(label="Analyze", menu=analyzemenu)
 
         modelmenu = tk.Menu(self.menubar, tearoff=0)
-        modelmenu.add_command(label="Generalized rewiring model", command=self.donothing)
-        modelmenu.add_command(label="BrainNet", command=self.donothing)
-        modelmenu.add_command(label="SIRS", command=self.donothing)
-        modelmenu.add_command(label="Kuramoto", command=self.donothing)
-        modelmenu.add_command(label="Machine Learning", command=self.donothing)
+        modelmenu.add_command(label="Generalized rewiring model", command=self.generalized_rewiring_model_window)
+        modelmenu.add_command(label="BrainNet", command=self.brainNet_window)
+        modelmenu.add_command(label="SIRS", command=self.sirs_window)
+        modelmenu.add_command(label="Kuramoto", command=self.kuramoto_window)
+        modelmenu.add_command(label="Machine Learning", command=self.machine_learning_window)
         self.menubar.add_cascade(label="Model", menu=modelmenu)
 
         container = ttk.Frame(self)
@@ -156,3 +156,23 @@ class BrainWave(tk.Tk):
         self.filename = ""
 
         plf.draw_empty_plot(self.frames[ChannelPlot])
+
+    def machine_learning_window(self):
+        win = tk.Toplevel()
+        win.wm_title("Machine Learning")
+
+    def sirs_window(self):
+        win = tk.Toplevel()
+        win.wm_title("SIRS")
+
+    def brainNet_window(self):
+        win = tk.Toplevel()
+        win.wm_title("BrainNet")
+
+    def kuramoto_window(self):
+        win = tk.Toplevel()
+        win.wm_title("Kuramoto")
+
+    def generalized_rewiring_model_window(self):
+        win = tk.Toplevel()
+        win.wm_title("Generalized rewiring model")
