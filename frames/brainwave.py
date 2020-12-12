@@ -26,12 +26,6 @@ class BrainWave(tk.Tk):
         filemenu.add_command(label="Exit", command=self.quit)
         self.menubar.add_cascade(label="File", menu=filemenu)
 
-        top_bar = TopBar(self)
-        top_bar.grid(row=0, column=0, columnspan=3, sticky="EW")
-        top_bar.columnconfigure(0, weight=1)
-        top_bar.rowconfigure(0, weight=0)
-
-
         editmenu = tk.Menu(self.menubar, tearoff=0)
         editmenu.add_command(label="Filter", command=self.donothing)
         editmenu.add_command(label="Standard Filter", command=self.donothing)
@@ -101,12 +95,10 @@ class BrainWave(tk.Tk):
         modelmenu.add_command(label="Machine Learning", command=self.machine_learning_window)
         self.menubar.add_cascade(label="Model", menu=modelmenu)
 
-        container = ttk.Frame(self)
-        container.grid()
-        container.columnconfigure(0, weight=1)
-
-        top_bar = TopBar(self, container)
-        top_bar.grid(row=0, column=0, columnspan=2, sticky="EW")
+        top_bar = TopBar(self)
+        top_bar.grid(row=0, column=0, columnspan=3, sticky="EW")
+        top_bar.columnconfigure(0, weight=1)
+        top_bar.rowconfigure(0, weight=0)
         self.frames[TopBar] = top_bar
 
         left_bar = LeftBar(self)
